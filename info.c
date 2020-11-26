@@ -17,10 +17,6 @@ void help(void)
             " from 1 to 9 (the positions of a tic tac \n"
             " toe).                                   \n"
             "                                         \n"
-            " Version: 1.0.0  by Hamilton G. Jr.      \n"
-            " Thank you to play this game. It is free \n"
-            " for everybody to have fun!              \n"
-            "                                         \n"
     );
 
 }
@@ -49,7 +45,7 @@ int main()
 {
 
     help();
-    version();
+    //version();
     return EXIT_SUCCESS;
 
 }
