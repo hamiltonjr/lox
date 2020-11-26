@@ -40,5 +40,8 @@ O and goes alternating automatically. The program says when a player wins
 or when it is a tie. In case of win or tie, the game is ended (and the 
 game file is deleted). A player also can end a game in any time.
 
-The game is available as a free software unde MIT License.
+In November, 2020 I was coded the core and now I am doing little enhance-
+ments. Depending when you are seeing it, the code can have some errors.
+
+The game is available as a free software under MIT License.
 
