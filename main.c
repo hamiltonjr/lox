@@ -30,23 +30,13 @@ int main(int argc, char **argv)
         switch (c)
         {
 
-        case 'c': create_game();
-        printf("New game created!\nHave fun!\n");
-        load_game(g);
-        show_board(g);
-        exit(EXIT_SUCCESS);
-
         case 'h': help();
-            exit(EXIT_SUCCESS);
+            break;;
         
-        case 'x': exit_game();
-            printf("Game deleted\n");
-            exit(EXIT_SUCCESS);
+        case 'v': version();
+            break;
 
-       case 'v': version();
-            exit(EXIT_SUCCESS);
-
-       case 'p': 
+        case 'p': 
             pos = atoi(optarg);
             if (pos < 1 || pos > 9)
             {
@@ -55,6 +45,16 @@ int main(int argc, char **argv)
             }
             break;
         
+        case 'c': create_game();
+        printf("New game created!\nHave fun!\n");
+        load_game(g);
+        show_board(g);
+        exit(EXIT_SUCCESS);
+
+        case 'x': exit_game();
+            printf("Game deleted\n");
+            exit(EXIT_SUCCESS);
+
         case '?':
             fprintf(stderr, "Usage: ./lox [option] [pos].\n");
             exit(EXIT_SUCCESS);
@@ -83,9 +83,6 @@ int main(int argc, char **argv)
     // after move, verify if some player won or if has a tie
     char status = verify_status(g);
 
-    // save game (always)
-    save_game(g);
-
     // winner
     if (status == 'X' || status == 'O')
     {
@@ -103,6 +100,7 @@ int main(int argc, char **argv)
     }
 
     // if is none result
+    save_game(g);
     return EXIT_SUCCESS;
 
 }

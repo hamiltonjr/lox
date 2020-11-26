@@ -27,6 +27,7 @@ typedef struct game_ game;
 #define atoi ATOI
 int ATOI(char*);
 
+bool convert(int, int*, int*);
 void create_game(void);
 void exit_game(void);
 void help(void);
