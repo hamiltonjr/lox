@@ -9,6 +9,15 @@
 void create_game(void)
 {
 
+    // verify if game exists
+    if (access(FILENAME, F_OK) == 0)
+    {
+        printf("%s\n", "Game already exists!");
+        exit_game();
+        printf("%s\n", "Game deleted and new game created");
+    }
+
+    // new game
     FILE *fp = fopen(FILENAME, "w"); 
     if (fp == NULL)
     {
@@ -33,6 +42,13 @@ void exit_game(void)
 {
 
     char command[100];
+
+    // verify if ngame exists or not
+    if (access(FILENAME, F_OK) == -1)
+    {
+        fprintf(stderr, "Game do not exists!\n");
+        exit(EXIT_FAILURE);
+    }
 
     // build command
     strcpy(command, "rm ");

@@ -55,7 +55,6 @@ int main(int argc, char **argv)
 
             // after move, verify if some player won or if has a tie
             char status = verify_status(g);
-            printf("status = |%c|\n", status);
 
             // winner
             if (status == 'X' || status == 'O')
