@@ -24,7 +24,7 @@ int main(int argc, char **argv)
     // dealing with arguments using getopt function (a GNU extension 
     // for glibc).
     opterr = 0;
-    while ((c = getopt(argc, argv, "chxvp:")) != -1)
+    while ((c = getopt(argc, argv, "hvp:cx")) != -1)
     {
 
         switch (c)
@@ -43,13 +43,51 @@ int main(int argc, char **argv)
                 printf("Position out of range (1-9)\n");
                 exit(EXIT_FAILURE);
             }
-            break;
+
+            // load stored game and define turn.
+            load_game(g);
+
+            // execute user move
+            play_game(g, pos);
+
+            // show board with new move
+            show_board(g);
+
+            // after move, verify if some player won or if has a tie
+            char status = verify_status(g);
+            printf("status = |%c|\n", status);
+
+            // winner
+            if (status == 'X' || status == 'O')
+            {
+                printf("\n\tThe player '%c' won!\n\n", g->turn);
+                exit_game();
+                exit(EXIT_SUCCESS);
+            }
+
+            // tie
+            if (status == 'T')
+            {
+                printf("\n\tIt is a tie!\n\n");
+                exit_game();
+                exit(EXIT_SUCCESS);
+            }
+
+            // change turn
+            if (g->turn == 'O')
+                g->turn = 'X';
+            else
+                g->turn = 'O';
+
+            // if is none result
+            save_game(g);
+            exit(EXIT_SUCCESS);
         
         case 'c': create_game();
-        printf("New game created!\nHave fun!\n");
-        load_game(g);
-        show_board(g);
-        exit(EXIT_SUCCESS);
+            printf("New game created!\nHave fun!\n");
+            load_game(g);
+            show_board(g);
+            exit(EXIT_SUCCESS);
 
         case 'x': exit_game();
             printf("Game deleted\n");
@@ -71,36 +109,6 @@ int main(int argc, char **argv)
         fprintf(stderr, "Usage: ./lox [option] [pos].\n");
     }
 
-    // load stored game and define turn.
-    load_game(g);
-
-    // execute user move
-    play_game(g, pos);
-
-    // show board with new move
-    show_board(g);
-
-    // after move, verify if some player won or if has a tie
-    char status = verify_status(g);
-
-    // winner
-    if (status == 'X' || status == 'O')
-    {
-        printf("\n\tThe player '%c' won!\n\n", g->turn);
-        exit_game();
-        exit(EXIT_SUCCESS);
-    }
-
-    // tie
-    if (status == 'T')
-    {
-        printf("\n\tIt is a tie!\n\n");
-        exit_game();
-        exit(EXIT_SUCCESS);
-    }
-
-    // if is none result
-    save_game(g);
     return EXIT_SUCCESS;
 
 }

@@ -9,19 +9,18 @@
 void create_game(void)
 {
 
-    FILE *fpout;
-
-    // try to open
-    printf("Trying to create new game...\n");
-    if ((fpout = fopen(FILENAME, "w")) == NULL)
+    FILE *fp = fopen(FILENAME, "w"); 
+    if (fp == NULL)
     {
-        fprintf(stderr, "Error trying to create new game!\n");
+        printf("%s\n%s\n", 
+               "Error trying to create new game!",
+               "Permission denied!"
+        );
         exit(EXIT_FAILURE);
     }
-
-    // initialize
-    fputc('O', fpout);
-    fclose(fpout);
+    
+    fputc('O', fp);
+    fclose(fp);
 
 }
 
@@ -35,8 +34,6 @@ void exit_game(void)
 
     char command[100];
 
-    printf("Trying to delete game...\n");
-    
     // build command
     strcpy(command, "rm ");
     strcat(command, FILENAME);
@@ -45,7 +42,7 @@ void exit_game(void)
     int error = system(command);
     if (error == -1)
     {
-        fprintf(stderr, "Error trying to delete game!\n");
+        fprintf(stderr, "Error trying to delete game!");
         exit(EXIT_FAILURE);
     }
 

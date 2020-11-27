@@ -60,14 +60,13 @@ void play_game(game *g, int pos)
         exit(EXIT_FAILURE);
     }
 
-    // save move
-    g->board[line][column] = g->turn;
+    if (g->board[line][column] != ' ')
+    {
+        fprintf(stderr, "ERROR: this position is already marked!\n");
+        exit(EXIT_FAILURE);
+    }
 
-    // change turn
-    if (g->turn == 'O')
-        g->turn = 'X';
-    else
-        g->turn = 'O';
+    g->board[line][column] = g->turn;
 
 }
 
