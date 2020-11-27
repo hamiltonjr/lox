@@ -41,7 +41,8 @@ or when it is a tie. In case of win or tie, the game is ended (and the
 game file is deleted). A player also can end a game in any time.
 
 In November, 2020 I was coded the core and now I am doing little enhance-
-ments. Depending when you are seeing it, the code can have some errors.
+ments. Depending when you are seeing it, the code can have some errors. I
+am not secure to exclude all test code at the end of each .c file.
 
 The game is available as a free software under MIT License.
 
